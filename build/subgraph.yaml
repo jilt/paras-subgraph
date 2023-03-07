@@ -1,0 +1,29 @@
+specVersion: 0.0.4
+description: Paras Subgraph for the Varda Vault Unlockable Content
+repository: https://github.com/jilt/parasubgraph.git
+schema:
+  file: schema.graphql
+features:
+  - ipfsOnEthereumContracts
+  - fullTextSearch
+  - grafting
+dataSources:
+  - kind: near
+    name: receipts
+    network: near-mainnet
+    source:
+      account: x.paras.near
+      startBlock: 46959101
+    mapping:
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: receipts\receipts.wasm
+      entities:
+        - NftMint
+        - NftCreateSerie
+        - Royalty
+        - NftBuy
+        - NftTransferPayout
+        - NftTransfer
+      receiptHandlers:
+        - handler: handleReceipt
